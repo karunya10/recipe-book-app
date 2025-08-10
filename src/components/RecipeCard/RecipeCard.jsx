@@ -1,10 +1,11 @@
 import styles from "./RecipeCard.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function RecipeCard({
   recipe,
-  handleDelete,
   handleFavourite,
   handleDeletedItems,
+  isTrashView = false,
+  handleRestoreDeletedItem,
 }) {
   const navigate = useNavigate();
 
@@ -14,19 +15,20 @@ function RecipeCard({
 
   return (
     <>
-      {/* <div onClick={handleNavigate} key={recipe.id}> */}
-      {/* 👇 key should be in the parent component (where you map() something) */}
-      <div onClick={handleNavigate}>
+      <div onClick={isTrashView === true ? null : handleNavigate}>
         <div className={styles.recipeCardContainer}>
           <div className={styles.imageWrapper}>
             {recipe.easy && <span className={styles.badge}>Easy</span>}
-            <img src={recipe.image}></img>
-            <span
-              className={styles.favourites}
-              onClick={(e) => handleFavourite(e, recipe.id)}
-            >
-              {recipe.isFav === false ? "🤍" : "❤️"}
-            </span>
+            <img src={recipe.image} />
+
+            {isTrashView == false && (
+              <span
+                className={styles.favourites}
+                onClick={(e) => handleFavourite(e, recipe.id)}
+              >
+                {recipe.isFav === false ? "🤍" : "❤️"}
+              </span>
+            )}
           </div>
           <h2>{recipe.name}</h2>
           <div className={styles.cookTimeDetails}>
@@ -39,7 +41,7 @@ function RecipeCard({
             <div className={styles.cookingInfo}>
               <p className={styles.timerImage}>
                 <span className={styles.textName}>
-                  <img src="/images/time.png" />
+                  <img src="/images/time.png" alt="duration" />
                 </span>
                 {recipe.cookTime}
               </p>
@@ -50,14 +52,26 @@ function RecipeCard({
             </div>
           </div>
 
-          <img
-            className={styles.deleteButton}
-            onClick={(e) => {
-              handleDeletedItems(recipe.id);
-              handleDelete(e, recipe.id);
-            }}
-            src="/images/bin.png"
-          />
+          {isTrashView ? (
+            <img
+              className={styles.addButton}
+              onClick={() => {
+                handleRestoreDeletedItem(recipe);
+              }}
+              src="/images/plus.png"
+              alt="Restore recipe"
+            />
+          ) : (
+            <img
+              className={styles.deleteButton}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDeletedItems(recipe.id);
+              }}
+              src="/images/bin.png"
+              alt="Delete recipe"
+            />
+          )}
         </div>
       </div>
     </>

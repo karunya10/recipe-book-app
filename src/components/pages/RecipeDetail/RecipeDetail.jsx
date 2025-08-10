@@ -1,12 +1,16 @@
 import { Link, useParams } from "react-router-dom";
 import styles from "./RecipeDetail.module.css";
+import { useEffect } from "react";
 
 function RecipeDetail({ recipes, setTitle }) {
   const { recipeId } = useParams();
   const recipe = recipes.find((oneRecipe) => {
     return oneRecipe.id == recipeId;
   });
-  setTitle(recipe.name);
+  useEffect(() => {
+    setTitle(recipe.name);
+  }, []);
+
   return (
     <>
       <div className={styles.recipeDetailGridContainer}>

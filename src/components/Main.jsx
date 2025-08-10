@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import RecipeList from "./RecipeList/RecipeList";
 
 function Main({
@@ -7,16 +8,17 @@ function Main({
   handleDeletedItems,
   setTitle,
 }) {
-  setTitle("Home Page");
+  useEffect(() => {
+    setTitle("Home Page");
+  }, [setTitle]);
+
   return (
-    <>
-      <RecipeList
-        recipes={recipes}
-        setRecipes={setRecipes}
-        handleFavourite={handleFavourite}
-        handleDeletedItems={handleDeletedItems}
-      />
-    </>
+    <RecipeList
+      recipes={recipes}
+      setRecipes={setRecipes}
+      handleFavourite={handleFavourite}
+      handleDeletedItems={handleDeletedItems}
+    />
   );
 }
 

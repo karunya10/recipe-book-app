@@ -2,14 +2,17 @@
   margin: 3px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   color: rgb(94, 30, 30);
+
+  border-radius: 8px;
+  height: 100%;
   box-shadow: 13px 6px 6px rgb(93 93 93 / 88%);
-  /* background-image: url("/images/recipeCardBackground.png"); */
 }
 .recipeCardContainer:hover {
   transform: scale(1.02);
+  cursor: pointer;
 }
 .recipeCardContainer h2,
 .textName {
@@ -56,7 +59,7 @@
   border-radius: 10px;
   object-fit: cover;
   border-radius: 8px 8px 0 0; /* 👉 little trick to make it look well integrated to the card :D */
-  aspect-ratio: 5/3; /* 👉 pure CSS magic (not supported by all browsers yet, but there are workarounds) */
+  aspect-ratio: 5/3; /*👉 pure CSS magic (not supported by all browsers yet, but there are workarounds) */
 }
 
 .badge {
@@ -70,7 +73,6 @@
   font-size: 0.8rem;
   font-weight: bold;
   border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 .favourites {
   position: absolute;
@@ -81,11 +83,9 @@
 }
 
 .favourites:hover {
-  box-shadow: 0 2px 5px rgba(1, 1, 1, 0);
   cursor: pointer;
 }
 .cookTimeDetails {
-  /* text-align: center; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -115,4 +115,14 @@
 
 .globe .textName {
   border-bottom: none;
+}
+.addButton {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: none;
+  height: 20px;
+}
+.addButton:hover {
+  transform: scale(1.02);
+  cursor: pointer;
 }

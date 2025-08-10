@@ -1,6 +1,7 @@
 .sideBarContainer {
   display: flex;
   flex-direction: column;
+  
   gap: 20px;
 }
 
@@ -43,4 +44,5 @@ aside.sideBarWholeContainer {
 
 .trashLink {
   margin-bottom: var(--height-footer);
+  align-self: flex-end;
 }

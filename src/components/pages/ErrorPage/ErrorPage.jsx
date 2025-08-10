@@ -1,9 +1,11 @@
 import errorGif from "../../../assets/Error404.gif";
-
+import { useEffect } from "react";
 import styles from "./ErrorPage.module.css";
 
 function ErrorPage({ setTitle }) {
-  setTitle("Error Page");
+  useEffect(() => {
+    setTitle("Error Page");
+  }, []);
   return (
     <>
       <div className={styles.errorImage}>

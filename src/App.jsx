@@ -27,11 +27,7 @@ function App() {
     e.stopPropagation();
     const newRecipeList = recipes.map((oneRecipe) => {
       if (oneRecipe.id === id) {
-        if (oneRecipe.isFav === false) {
-          oneRecipe.isFav = true;
-        } else {
-          oneRecipe.isFav = false;
-        }
+        oneRecipe.isFav = !oneRecipe.isFav;
       }
       return oneRecipe;
     });
@@ -43,10 +39,13 @@ function App() {
     const deletedItem = recipes.find((recipe) => {
       return recipe.id === recipeId;
     });
+    const filteredRecipeList = recipes.filter((recipe) => {
+      return recipe.id !== recipeId;
+    });
+    setRecipes(filteredRecipeList);
     setDeletedList([...deletedList, deletedItem]);
-    console.log(deletedList);
   };
-  const handleAddDeletedItem = (deletedItem) => {
+  const handleRestoreDeletedItem = (deletedItem) => {
     setRecipes([...recipes, deletedItem]);
     const filteredRecipeList = deletedList.filter((recipe) => {
       return recipe.id !== deletedItem.id;
@@ -61,12 +60,10 @@ function App() {
   };
   return (
     <>
-      <Header title={title}></Header>
+      <Header title={title} />
 
       <div className="mainComponent-container">
-        <Sidebar></Sidebar>
-
-        {/* 👇 it will be easier to control this section's layout if it has its own div */}
+        <Sidebar />
         <div id="main" className="mainContent">
           <Routes>
             <Route
@@ -87,7 +84,14 @@ function App() {
             />
             <Route
               path="/favourites"
-              element={<Favourite recipes={recipes} setTitle={setTitle} />}
+              element={
+                <Favourite
+                  recipes={recipes}
+                  setTitle={setTitle}
+                  handleFavourite={handleFavourite}
+                  handleDeletedItems={handleDeletedItems}
+                />
+              }
             />
             <Route
               path="/add-recipe"
@@ -116,7 +120,7 @@ function App() {
               element={
                 <DeletedRecipes
                   deletedList={deletedList}
-                  handleAddDeletedItem={handleAddDeletedItem}
+                  handleRestoreDeletedItem={handleRestoreDeletedItem}
                   setTitle={setTitle}
                 />
               }
@@ -125,7 +129,7 @@ function App() {
           </Routes>
         </div>
       </div>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }
