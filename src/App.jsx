@@ -5,7 +5,7 @@ import Footer from "./components/Footer/Footer";
 import Main from "./components/Main";
 import mockRecipeList from "../mock-data-recipe-book.json";
 import RecipeDetail from "./components/pages/RecipeDetail/RecipeDetail";
-import AddRecipe from "./components/pages/AddRecipe/AddRecipe";
+import AddEditRecipe from "./components/pages/AddEditRecipe/AddEditRecipe";
 import About from "./components/pages/About/About";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
@@ -71,7 +71,6 @@ function App() {
               element={
                 <Main
                   recipes={recipes}
-                  setRecipes={setRecipes}
                   handleFavourite={handleFavourite}
                   handleDeletedItems={handleDeletedItems}
                   setTitle={setTitle}
@@ -96,7 +95,8 @@ function App() {
             <Route
               path="/add-recipe"
               element={
-                <AddRecipe
+                <AddEditRecipe
+                  key="add"
                   isEdit={false}
                   setTitle={setTitle}
                   addNewRecipe={addNewRecipe}
@@ -106,7 +106,8 @@ function App() {
             <Route
               path="/edit-recipe/:recipeId"
               element={
-                <AddRecipe
+                <AddEditRecipe
+                  key="edit"
                   setTitle={setTitle}
                   isEdit={true}
                   addEditedRecipe={addEditedRecipe}

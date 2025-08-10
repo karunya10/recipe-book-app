@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import styles from "./AddRecipe.module.css";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import styles from "./AddEditRecipe.module.css";
+import { useParams, useNavigate } from "react-router-dom";
 
-function AddRecipe({
+function AddEditRecipe({
   isEdit,
   setTitle,
   addNewRecipe,
@@ -11,10 +11,9 @@ function AddRecipe({
 }) {
   const { recipeId } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
-  const path = location.pathname.split("/")[1];
+
   useEffect(() => {
-    setTitle(path.includes("edit") ? "Edit Recipe" : "Add Recipe");
+    setTitle(isEdit === true ? "Edit Recipe" : "Add Recipe");
   }, []);
   const oneRecipe =
     isEdit == true ? recipes.find((recipe) => recipe.id === recipeId) : null;
@@ -51,7 +50,6 @@ function AddRecipe({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Convert ingredients & instructions into arrays
     const recipe = {
       ...formData,
       ingredients: formData.ingredients.split("\n").map((i) => i.trim()),
@@ -150,4 +148,4 @@ function AddRecipe({
     </>
   );
 }
-export default AddRecipe;
+export default AddEditRecipe;

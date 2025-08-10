@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import styles from "./Favourites.module.css";
 import { useEffect } from "react";
 import RecipeCard from "../../RecipeCard/RecipeCard";
@@ -7,10 +6,6 @@ function Favourite({ recipes, setTitle, handleFavourite, handleDeletedItems }) {
     setTitle("Favourites");
   }, []);
 
-  const navigate = useNavigate();
-  const handleNavigate = (recipeId) => {
-    navigate(`/recipe-detail/${recipeId}`);
-  };
   const favouriteList = recipes.filter((oneRecipe) => oneRecipe.isFav);
   return (
     <>
@@ -26,7 +21,6 @@ function Favourite({ recipes, setTitle, handleFavourite, handleDeletedItems }) {
                 recipe={oneRecipe}
                 handleFavourite={handleFavourite}
                 handleDeletedItems={handleDeletedItems}
-                onClick={() => handleNavigate(oneRecipe.id)}
               />
             );
           })}

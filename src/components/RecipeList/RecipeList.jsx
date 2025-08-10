@@ -3,12 +3,7 @@ import Search from "../Search/Search";
 import { useEffect, useState } from "react";
 import styles from "./RecipeList.module.css";
 
-function RecipeList({
-  recipes,
-  setRecipes,
-  handleFavourite,
-  handleDeletedItems,
-}) {
+function RecipeList({ recipes, handleFavourite, handleDeletedItems }) {
   const [search, setSearch] = useState("");
   const [filteredList, setFilteredList] = useState([...recipes]);
 
@@ -29,8 +24,6 @@ function RecipeList({
               <RecipeCard
                 recipe={recipe}
                 key={recipe.id}
-                recipes={recipes}
-                setRecipes={setRecipes}
                 handleFavourite={handleFavourite}
                 handleDeletedItems={handleDeletedItems}
               />
